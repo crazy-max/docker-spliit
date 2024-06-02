@@ -1,0 +1,32 @@
+name: spliit
+
+services:
+  db:
+    image: postgres:${POSTGRES_VERSION}
+    container_name: spliit_db
+    volumes:
+      - "./db:/var/lib/postgresql/data"
+    environment:
+      - "TZ"
+      - "POSTGRES_DB"
+      - "POSTGRES_USER"
+      - "POSTGRES_PASSWORD"
+    restart: always
+
+  spliit:
+    image: ${SPLIIT_IMAGE:-crazymax/spliit}
+    container_name: ${SPLIIT_CONTAINER:-spliit}
+    depends_on:
+      - db
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+    environment:
+      - "TZ"
+      - "POSTGRES_HOST=db"
+      - "POSTGRES_PORT=5432"
+      - "POSTGRES_DB"
+      - "POSTGRES_USER"
+      - "POSTGRES_PASSWORD"
+    restart: always
