@@ -3,11 +3,13 @@
 ARG SPLIIT_VERSION=1.8.1
 ARG ALPINE_VERSION=3.20
 
-# https://github.com/spliit-app/spliit/blob/1.8.1/Dockerfile#L1
-ARG NODE_VERSION=21
-
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS base
-RUN apk --update --no-cache add ca-certificates openssl
+FROM alpine:${ALPINE_VERSION} AS base
+RUN apk --update --no-cache add \
+  bash \
+  ca-certificates \
+  nodejs-current \
+  npm \
+  openssl
 WORKDIR /usr/app
 ARG SPLIIT_VERSION
 ADD "https://github.com/spliit-app/spliit.git#${SPLIIT_VERSION}" .
@@ -20,14 +22,22 @@ RUN cp /usr/app/scripts/build.env /usr/app/.env
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 RUN rm -rf .next/cache
+RUN ls -al
 
 FROM base AS deps
 RUN npm ci --omit=dev --omit=optional --ignore-scripts
 RUN npm install sharp
 RUN npx prisma generate
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION}
-RUN apk --update --no-cache add bash ca-certificates openssl postgresql-client tzdata
+FROM alpine:${ALPINE_VERSION}
+RUN apk --update --no-cache add \
+  bash \
+  ca-certificates \
+  nodejs-current \
+  npm \
+  openssl \
+  postgresql-client \
+  tzdata
 
 WORKDIR /usr/app
 COPY --from=deps /usr/app/node_modules ./node_modules
