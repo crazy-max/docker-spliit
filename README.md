@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://hub.docker.com/r/crazymax/spliit/tags?page=1&ordering=last_updated"><img src="https://img.shields.io/github/v/tag/crazy-max/docker-spliit?label=version&style=flat-square" alt="Latest Version"></a>
-  <a href="https://github.com/crazy-max/docker-spliit/actions?workflow=build"><img src="https://img.shields.io/github/actions/workflow/status/crazy-max/docker-spliit/build.yml?branch=master&label=build&logo=github&style=flat-square" alt="Build Status"></a>
+  <a href="https://github.com/crazy-max/docker-spliit/actions?workflow=build"><img src="https://img.shields.io/github/actions/workflow/status/crazy-max/docker-spliit/build.yml?label=build&logo=github&style=flat-square" alt="Build Status"></a>
   <a href="https://hub.docker.com/r/crazymax/spliit/"><img src="https://img.shields.io/docker/stars/crazymax/spliit.svg?style=flat-square&logo=docker" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/spliit/"><img src="https://img.shields.io/docker/pulls/crazymax/spliit.svg?style=flat-square&logo=docker" alt="Docker Pulls"></a>
   <br /><a href="https://github.com/sponsors/crazy-max"><img src="https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square" alt="Become a sponsor"></a>
