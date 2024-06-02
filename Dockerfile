@@ -23,27 +23,22 @@ RUN rm -rf .next/cache
 
 FROM base AS deps
 RUN npm ci --omit=dev --omit=optional --ignore-scripts
+RUN npm install sharp
 RUN npx prisma generate
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION}
-RUN apk --update --no-cache add ca-certificates openssl tzdata
+RUN apk --update --no-cache add bash ca-certificates openssl postgresql-client tzdata
 
-ENV TZ=UTC
-
-EXPOSE 3000/tcp
 WORKDIR /usr/app
-
 COPY --from=deps /usr/app/node_modules ./node_modules
 COPY --from=build /usr/app/package.json /usr/app/package-lock.json /usr/app/next.config.js ./
 COPY --from=build /usr/app/.next ./.next
 COPY --from=build /usr/app/public ./public
 COPY --from=build /usr/app/prisma ./prisma
-RUN ls -al
+COPY entrypoint.sh /usr/app/
 
-COPY <<-"EOF" /entrypoint.sh
-	#!/bin/sh
-	set -e
-	npx prisma migrate deploy
-	exec npm run start
-EOF
-CMD sh /entrypoint.sh
+ENV TZ=UTC
+EXPOSE 3000/tcp
+
+ENTRYPOINT [ "/usr/app/entrypoint.sh" ]
+CMD [ "npm", "run", "start" ]
