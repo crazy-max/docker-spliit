@@ -53,12 +53,11 @@ docker buildx bake image-all
 The following platforms for this image are available:
 
 ```
-$ docker run --rm mplatform/mquery crazymax/spliit:latest
-Image: crazymax/spliit:latest
- * Manifest List: Yes
- * Supported platforms:
-   - linux/amd64
-   - linux/arm64
+$ docker buildx imagetools inspect crazymax/spliit --format "{{json .Manifest}}" | \
+  jq -r '.manifests[] | select(.platform.os != null and .platform.os != "unknown") | .platform | "\(.os)/\(.architecture)\(if .variant then "/" + .variant else "" end)"'
+
+linux/amd64
+linux/arm64
 ```
 
 ## Environment variables
