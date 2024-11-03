@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG SPLIIT_VERSION=1.8.1
+ARG SPLIIT_VERSION=1.14.1
 ARG ALPINE_VERSION=3.20
 
 FROM alpine:${ALPINE_VERSION} AS base
@@ -41,7 +41,7 @@ RUN apk --update --no-cache add \
 
 WORKDIR /usr/app
 COPY --from=deps /usr/app/node_modules ./node_modules
-COPY --from=build /usr/app/package.json /usr/app/package-lock.json /usr/app/next.config.js ./
+COPY --from=build /usr/app/package.json /usr/app/package-lock.json /usr/app/next.config.mjs ./
 COPY --from=build /usr/app/.next ./.next
 COPY --from=build /usr/app/public ./public
 COPY --from=build /usr/app/prisma ./prisma
