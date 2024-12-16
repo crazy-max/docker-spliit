@@ -4,6 +4,8 @@ services:
   db:
     image: postgres:${POSTGRES_VERSION}
     container_name: spliit_db
+    volumes:
+      - database:/var/lib/postgresql/data
     environment:
       - "TZ"
       - "POSTGRES_DB"
@@ -28,3 +30,6 @@ services:
       - "POSTGRES_USER"
       - "POSTGRES_PASSWORD"
     restart: always
+
+volumes:
+  database
