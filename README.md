@@ -63,10 +63,12 @@ linux/arm64
 ## Environment variables
 
 * `TZ`: The timezone assigned to the container (default `UTC`)
-* `DB_NAME`: Database name (default `spliit`)
-* `DB_USER`: Username for database (default `spliit`)
-* `DB_PASSWORD`: Password for database user
-* `DB_TIMEOUT`: Time in seconds after which we stop trying to reach the database server (default `60`)
+* `POSTGRES_HOST`: Hostname of the database server (default `db`)
+* `POSTGRES_PORT`: Port where the database server is reachable (default `5432`)
+* `POSTGRES_USER`: Username for database (default `spliit`)
+* `POSTGRES_DB`: Database name (default `spliit`)
+* `POSTGRES_TIMEOUT`: Time in seconds after which we stop trying to reach the database server (default `60`)
+* `POSTGRES_PASSWORD`: Password for database user (default empty)
 
 ## Ports
 
