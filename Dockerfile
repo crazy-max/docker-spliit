@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG SPLIIT_VERSION=1.15.0
+ARG SPLIIT_VERSION=1.16.0
 ARG ALPINE_VERSION=3.21
 
 FROM alpine:${ALPINE_VERSION} AS base
