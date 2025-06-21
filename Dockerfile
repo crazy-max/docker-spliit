@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ARG SPLIIT_VERSION=1.15.0
-ARG ALPINE_VERSION=3.21
+ARG ALPINE_VERSION=3.22
 
 FROM alpine:${ALPINE_VERSION} AS base
 RUN apk --update --no-cache add \
