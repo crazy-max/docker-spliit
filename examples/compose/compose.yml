@@ -32,4 +32,4 @@ services:
     restart: always
 
 volumes:
-  database
+  database:
